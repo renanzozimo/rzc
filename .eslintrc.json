@@ -1,0 +1,7 @@
+{
+  "extends": ["plugin:vue/essential", "@vue/prettier"],
+  "parserOptions": {
+    "extends": "standard",
+    "parser": "babel-eslint"
+  }
+}
