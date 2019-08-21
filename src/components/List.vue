@@ -187,6 +187,7 @@ export default {
       return this.getColor(word) === color;
     },
     switchColor(word) {
+      ga("send", "event", "buttonClick", `${word} was clicked`);
       let color = this.getColor(word);
 
       if (color === "") this.setColor(word, "red");
@@ -195,8 +196,6 @@ export default {
       if (color === "deep-purple") this.setColor(word, "");
 
       this.$forceUpdate();
-
-      ga("send", "event", "buttonClick", `${word} was clicked`);
     },
 
     getAllWords(min, max, qty) {
