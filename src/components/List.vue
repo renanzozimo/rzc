@@ -43,7 +43,10 @@
             bottom
             right
             fab
-            @click="generate()"
+            @click="
+              generate();
+              _gaq.push(['_trackEvent', 'button3', 'clicked']);
+            "
           >
             <v-icon>mdi-sync</v-icon>
           </v-btn>
