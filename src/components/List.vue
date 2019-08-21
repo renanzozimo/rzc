@@ -218,7 +218,11 @@ export default {
         this.setWordsLocalStorage(this.words);
         this.loading = false;
       }, 1000);
-      ga("send", "event", "Button", "refresh", "Atualizou tudo");
+      ga("send", "event", "Signup Form", "submit", {
+        hitCallback: function() {
+          alert("tentou enviar");
+        }
+      });
     }
   },
   mounted() {
