@@ -218,7 +218,7 @@ export default {
         this.setWordsLocalStorage(this.words);
         this.loading = false;
       }, 1000);
-      ga("send", "event", "Signup Form", "submit", {
+      ga("send", "event", "buttonClick", "refresh cards", {
         hitCallback: function() {
           alert("tentou enviar");
         }
