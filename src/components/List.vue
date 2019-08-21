@@ -219,6 +219,7 @@ export default {
         this.loading = false;
       }, 1000);
       _gaq.push(["_trackEvent", "button3", "clicked"]);
+      console.log(_gaq);
     }
   },
   mounted() {
