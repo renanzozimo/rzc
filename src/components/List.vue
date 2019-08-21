@@ -187,7 +187,9 @@ export default {
       return this.getColor(word) === color;
     },
     switchColor(word) {
-      ga("send", "event", "buttonClick", `${word} was clicked`);
+      let string = word + " was clicked";
+      ga("send", "event", "buttonClick", string);
+      ga("send", "event", "buttonClick", "Rolou demais");
       let color = this.getColor(word);
 
       if (color === "") this.setColor(word, "red");
