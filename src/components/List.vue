@@ -195,6 +195,8 @@ export default {
       if (color === "deep-purple") this.setColor(word, "");
 
       this.$forceUpdate();
+
+      ga("send", "event", "buttonClick", `${word} was clicked`);
     },
 
     getAllWords(min, max, qty) {
@@ -218,11 +220,7 @@ export default {
         this.setWordsLocalStorage(this.words);
         this.loading = false;
       }, 1000);
-      ga("send", "event", "buttonClick", "refresh cards", {
-        hitCallback: function() {
-          alert("tentou enviar");
-        }
-      });
+      ga("send", "event", "buttonClick", "refresh cards");
     }
   },
   mounted() {
