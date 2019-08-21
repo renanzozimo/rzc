@@ -43,10 +43,7 @@
             bottom
             right
             fab
-            @click="
-              generate();
-              _gaq.push(['_trackEvent', 'button3', 'clicked']);
-            "
+            @click="generate()"
           >
             <v-icon>mdi-sync</v-icon>
           </v-btn>
@@ -221,6 +218,7 @@ export default {
         this.setWordsLocalStorage(this.words);
         this.loading = false;
       }, 1000);
+      _gaq.push(["_trackEvent", "button3", "clicked"]);
     }
   },
   mounted() {
