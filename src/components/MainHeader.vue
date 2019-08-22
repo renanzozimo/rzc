@@ -61,9 +61,15 @@
 
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-        <v-card-title class="headline justify-center"
-          >Código Secreto</v-card-title
+        <v-card-title
+          class="d-flex justify-space-between align-center justify-center"
         >
+          <span class="headline">Código Secreto</span>
+
+          <v-btn text icon @click="dialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
 
         <v-card-text class="text-center mt-4">
           Isso é uma simples adaptação digital dos cartões do board game

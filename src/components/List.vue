@@ -33,24 +33,19 @@
       </div>
     </div>
 
-    <v-tooltip color="pink darken-2" left>
-      <template v-slot:activator="{ on }">
-        <v-btn
-          v-show="words.length > 0"
-          v-on="on"
-          color="pink lighten-1"
-          dark
-          fixed
-          bottom
-          right
-          fab
-          @click="generate()"
-        >
-          <v-icon>mdi-sync</v-icon>
-        </v-btn>
-      </template>
-      <span>Gerar novamente</span>
-    </v-tooltip>
+    <v-btn
+      v-show="words.length > 0"
+      v-on="on"
+      color="pink lighten-1"
+      dark
+      fixed
+      bottom
+      right
+      fab
+      @click="generate()"
+    >
+      <v-icon>mdi-sync</v-icon>
+    </v-btn>
 
     <loading :active="this.loading" />
   </div>
