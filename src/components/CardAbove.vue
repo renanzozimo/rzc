@@ -47,7 +47,7 @@ $dEasing: cubic-bezier(0, 0, 0.2, 1);
   transition: opacity 200ms $dEasing 0ms, transform 200ms $dEasing 0ms,
     z-index 0ms linear 200ms !important;
   opacity: 0;
-  transform: translateY(-30px);
+  transform: translateY(-16px);
   z-index: -1;
 
   &.active {

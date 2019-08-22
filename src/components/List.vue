@@ -1,5 +1,11 @@
 <template>
-  <div class="main-container orange lighten-4 pa-5">
+  <div
+    class="main-container d-flex justify-center align-center pb-7 flex-column blue-grey"
+  >
+    <div class="main-container__detail blue-grey darken-4"></div>
+
+    <main-header />
+
     <div
       class="main-grid full-width full-height pr-3 pb-3 d-flex justify-space-between"
       v-show="words.length > 0"
@@ -15,7 +21,9 @@
           @click="switchColor(wordItem.word)"
         >
           <div class="d-flex justify-center align-center full-height">
-            <h4 class="text-center text-uppercase disable-select">
+            <h4
+              class="text-center text-uppercase disable-select blue-grey--text text--darken-3"
+            >
               {{ wordItem.word }}
             </h4>
           </div>
@@ -25,26 +33,24 @@
       </div>
     </div>
 
-    <v-fab-transition>
-      <v-tooltip left>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            v-show="words.length > 0"
-            v-on="on"
-            color="blue"
-            dark
-            fixed
-            bottom
-            right
-            fab
-            @click="generate()"
-          >
-            <v-icon>mdi-sync</v-icon>
-          </v-btn>
-        </template>
-        <span>Gerar novamente</span>
-      </v-tooltip>
-    </v-fab-transition>
+    <v-tooltip color="pink darken-2" left>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          v-show="words.length > 0"
+          v-on="on"
+          color="pink lighten-1"
+          dark
+          fixed
+          bottom
+          right
+          fab
+          @click="generate()"
+        >
+          <v-icon>mdi-sync</v-icon>
+        </v-btn>
+      </template>
+      <span>Gerar novamente</span>
+    </v-tooltip>
 
     <loading :active="this.loading" />
   </div>
@@ -57,6 +63,17 @@
 }
 .main-container {
   height: 100vh;
+  z-index: 0;
+
+  &__detail {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30%;
+    min-width: 204px;
+    z-index: 0;
+  }
 }
 .main-grid {
   flex-wrap: wrap;
@@ -74,12 +91,14 @@ import Words from "../data/words";
 //Components
 import CardAbove from "../components/CardAbove";
 import Loading from "../components/Loading";
+import MainHeader from "../components/MainHeader";
 
 export default {
   name: "home",
   components: {
     CardAbove,
-    Loading
+    Loading,
+    MainHeader
   },
   data: () => ({
     loading: false,
