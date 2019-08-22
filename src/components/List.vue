@@ -65,7 +65,6 @@
     right: 0;
     height: 100%;
     width: 30%;
-    min-width: 204px;
     z-index: 0;
   }
 }
