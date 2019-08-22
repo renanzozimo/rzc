@@ -5,21 +5,12 @@
       v-show="words.length > 0"
     >
       <div class="d-flex col-fuso pl-3 pt-3" v-for="word in words" :key="word">
-        <v-card class="full-width px-1" hover @click="switchColor(word)">
+        <v-card
+          class="full-width px-1 relative"
+          hover
+          @click="switchColor(word)"
+        >
           <div class="d-flex justify-center align-center full-heigth">
-            <v-icon
-              class="mr-1 ty-adj deep-purple--text"
-              v-show="isColor('deep-purple', word)"
-              >mdi-skull</v-icon
-            >
-            <v-icon
-              class="mr-1 ty-adj blue--text"
-              v-show="isColor('blue', word)"
-              >mdi-checkbox-blank-circle</v-icon
-            >
-            <v-icon class="mr-1 ty-adj red--text" v-show="isColor('red', word)"
-              >mdi-cards-diamond</v-icon
-            >
             <h4
               class="text-center text-uppercase disable-select"
               :class="`${getColor(word)}--text`"
@@ -27,6 +18,37 @@
               {{ word }}
             </h4>
           </div>
+
+          <v-card
+            transition="scroll-y-transition"
+            class="spy-card red"
+            :class="{ active: isColor('red', word) }"
+          >
+            <h4 class="text-uppercase disable-select white--text pa-2">
+              {{ word }}
+            </h4>
+            <img class="spy-card__img" src="../assets/spy.svg" alt="spy" />
+          </v-card>
+          <v-card
+            transition="scroll-y-transition"
+            class="spy-card blue"
+            :class="{ active: isColor('blue', word) }"
+          >
+            <h4 class="text-uppercase disable-select white--text pa-2">
+              {{ word }}
+            </h4>
+            <img class="spy-card__img" src="../assets/spy.svg" alt="spy" />
+          </v-card>
+          <v-card
+            transition="scroll-y-transition"
+            class="spy-card deep-purple"
+            :class="{ active: isColor('deep-purple', word) }"
+          >
+            <h4 class="text-uppercase disable-select white--text pa-2">
+              {{ word }}
+            </h4>
+            <img class="spy-card__img" src="../assets/death.svg" alt="spy" />
+          </v-card>
         </v-card>
       </div>
     </div>
@@ -70,6 +92,52 @@
 </template>
 
 <style lang="scss">
+$easing: cubic-bezier(0.4, 0, 0.2, 1);
+$dEasing: cubic-bezier(0, 0, 0.2, 1);
+$aEasing: cubic-bezier(0.4, 0, 1, 1);
+
+.relative {
+  position: relative;
+}
+.spy-card {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  transition: opacity 200ms $dEasing 0ms, transform 200ms $dEasing 0ms,
+    z-index 0ms linear 200ms !important;
+  opacity: 0;
+  transform: translateY(-30px);
+  z-index: -1;
+
+  &.active {
+    transition: opacity 200ms $dEasing 250ms, transform 200ms $dEasing 250ms,
+      z-index 0ms linear 0ms !important;
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 2;
+  }
+
+  > * {
+    transition: opacity 0ms $dEasing 200ms;
+    opacity: 0;
+  }
+
+  &.active > * {
+    transition: opacity 200ms $dEasing 450ms;
+    opacity: 0.8;
+  }
+
+  &__img {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    max-height: 80%;
+    filter: saturate(0.5) opacity(0.3);
+  }
+}
 .col-fuso {
   width: 20%;
   flex-shrink: 0;
@@ -188,8 +256,7 @@ export default {
     },
     switchColor(word) {
       let string = word + " was clicked";
-      ga("send", "event", "buttonClick", string);
-      ga("send", "event", "buttonClick", "Rolou demais");
+      ga("send", "event", "cardClick", string); // eslint-disable-line
       let color = this.getColor(word);
 
       if (color === "") this.setColor(word, "red");
@@ -221,7 +288,7 @@ export default {
         this.setWordsLocalStorage(this.words);
         this.loading = false;
       }, 1000);
-      ga("send", "event", "buttonClick", "refresh cards");
+      ga("send", "event", "buttonClick", "refresh cards");// eslint-disable-line
     }
   },
   mounted() {
