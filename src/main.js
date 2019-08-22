@@ -5,6 +5,8 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import Vuelidate from "vuelidate";
 
+import "./assets/scss/utils.scss";
+
 Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);

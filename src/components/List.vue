@@ -1,54 +1,26 @@
 <template>
   <div class="main-container orange lighten-4 pa-5">
     <div
-      class="main-grid pr-3 pb-3 d-flex justify-space-between"
+      class="main-grid full-width full-height pr-3 pb-3 d-flex justify-space-between"
       v-show="words.length > 0"
     >
-      <div class="d-flex col-fuso pl-3 pt-3" v-for="word in words" :key="word">
+      <div
+        class="d-flex card-wrapper pl-3 pt-3"
+        v-for="wordItem in words"
+        :key="wordItem.word"
+      >
         <v-card
           class="full-width px-1 relative"
           hover
-          @click="switchColor(word)"
+          @click="switchColor(wordItem.word)"
         >
-          <div class="d-flex justify-center align-center full-heigth">
-            <h4
-              class="text-center text-uppercase disable-select"
-              :class="`${getColor(word)}--text`"
-            >
-              {{ word }}
+          <div class="d-flex justify-center align-center full-height">
+            <h4 class="text-center text-uppercase disable-select">
+              {{ wordItem.word }}
             </h4>
           </div>
 
-          <v-card
-            transition="scroll-y-transition"
-            class="spy-card red"
-            :class="{ active: isColor('red', word) }"
-          >
-            <h4 class="text-uppercase disable-select white--text pa-2">
-              {{ word }}
-            </h4>
-            <img class="spy-card__img" src="../assets/spy.svg" alt="spy" />
-          </v-card>
-          <v-card
-            transition="scroll-y-transition"
-            class="spy-card blue"
-            :class="{ active: isColor('blue', word) }"
-          >
-            <h4 class="text-uppercase disable-select white--text pa-2">
-              {{ word }}
-            </h4>
-            <img class="spy-card__img" src="../assets/spy.svg" alt="spy" />
-          </v-card>
-          <v-card
-            transition="scroll-y-transition"
-            class="spy-card deep-purple"
-            :class="{ active: isColor('deep-purple', word) }"
-          >
-            <h4 class="text-uppercase disable-select white--text pa-2">
-              {{ word }}
-            </h4>
-            <img class="spy-card__img" src="../assets/death.svg" alt="spy" />
-          </v-card>
+          <card-above :color="wordItem.color" :word="wordItem.word" />
         </v-card>
       </div>
     </div>
@@ -74,71 +46,12 @@
       </v-tooltip>
     </v-fab-transition>
 
-    <div
-      class="loading-container d-flex justify-center align-center flex-column"
-      :class="{ active: this.loading }"
-    >
-      <div class="pb-6" style="width: 120px">
-        <img src="../assets/finn_and_Jake.png" class="full-width" />
-      </div>
-      <v-progress-circular
-        :size="96"
-        :width="3"
-        indeterminate
-        color="red"
-      ></v-progress-circular>
-    </div>
+    <loading :active="this.loading" />
   </div>
 </template>
 
 <style lang="scss">
-$easing: cubic-bezier(0.4, 0, 0.2, 1);
-$dEasing: cubic-bezier(0, 0, 0.2, 1);
-$aEasing: cubic-bezier(0.4, 0, 1, 1);
-
-.relative {
-  position: relative;
-}
-.spy-card {
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  transition: opacity 200ms $dEasing 0ms, transform 200ms $dEasing 0ms,
-    z-index 0ms linear 200ms !important;
-  opacity: 0;
-  transform: translateY(-30px);
-  z-index: -1;
-
-  &.active {
-    transition: opacity 200ms $dEasing 250ms, transform 200ms $dEasing 250ms,
-      z-index 0ms linear 0ms !important;
-    opacity: 1;
-    transform: translateY(0);
-    z-index: 2;
-  }
-
-  > * {
-    transition: opacity 0ms $dEasing 200ms;
-    opacity: 0;
-  }
-
-  &.active > * {
-    transition: opacity 200ms $dEasing 450ms;
-    opacity: 0.8;
-  }
-
-  &__img {
-    position: absolute;
-    right: -10px;
-    bottom: -10px;
-    max-height: 80%;
-    filter: saturate(0.5) opacity(0.3);
-  }
-}
-.col-fuso {
+.card-wrapper {
   width: 20%;
   flex-shrink: 0;
 }
@@ -146,74 +59,34 @@ $aEasing: cubic-bezier(0.4, 0, 1, 1);
   height: 100vh;
 }
 .main-grid {
-  height: 100%;
-  width: 100%;
   flex-wrap: wrap;
-}
-.full-width {
-  width: 100%;
-}
-.full-heigth {
-  height: 100%;
-}
-.loading-container {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: rgba(#fff, 0.8);
-  transition: opacity 200ms ease-in-out 0ms, transform 0ms linear 200ms;
-  opacity: 0;
-  transform: scale(0);
-
-  &.active {
-    transition: opacity 200ms ease-in-out 10ms, transform 0ms linear 0ms;
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.disable-select {
-  user-select: none; /* supported by Chrome and Opera */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-}
-.ty-adj {
-  transform: translateY(-2px);
 }
 </style>
 
 <script>
-const getRandomInt = (min, max) => {
-  return (
-    Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) +
-    Math.ceil(min)
-  );
-};
+//Scripts
+import getObjByProp from "../assets/scripts/getObjByProp";
+import getRandomUniqueNumbers from "../assets/scripts/getRandomUniqueNumbers";
 
-const getRandomUniqueNumbers = (min, max, qty, arr = []) => {
-  let i = 0;
-  while (i < qty) {
-    let n = getRandomInt(min, max);
-    !arr.includes(n) && arr.push(n) && i++;
-  }
-  return arr;
-};
-
+//Data
 import Words from "../data/words";
-import { setTimeout } from "timers";
+
+//Components
+import CardAbove from "../components/CardAbove";
+import Loading from "../components/Loading";
 
 export default {
   name: "home",
+  components: {
+    CardAbove,
+    Loading
+  },
   data: () => ({
     loading: false,
     words: [],
     min: 0,
     max: 480,
-    qty: 25,
-    colors: {}
+    qty: 25
   }),
   methods: {
     //WORDS
@@ -223,12 +96,12 @@ export default {
     getWordsInLocalStorage() {
       return localStorage.getItem("words");
     },
-    setWordsLocalStorage(list) {
-      localStorage.setItem("words", list);
+    setWordsInLocalStorage(list) {
+      localStorage.setItem("words", JSON.stringify(list));
     },
     startWords() {
       if (this.hasWordsInLocalStorage()) {
-        this.words = this.getWordsInLocalStorage().split(",");
+        this.words = JSON.parse(this.getWordsInLocalStorage());
       } else {
         this.generate();
       }
@@ -236,20 +109,29 @@ export default {
     getWord(n) {
       return n < Words.length ? Words[n] : "--";
     },
+    getAllWords(min, max, qty) {
+      return getRandomUniqueNumbers(min, max, qty).map(n => {
+        return {
+          word: this.getWord(n),
+          color: ""
+        };
+      });
+    },
 
     //COLORS
-    startColors(list) {
-      let obj = {};
-      list.map(w => {
-        obj[w] = "";
-      });
-      this.colors = { ...obj };
-    },
     getColor(word) {
-      return this.colors[word] || "";
+      const obj = getObjByProp(this.words, word, "word");
+      return obj.color || "";
     },
     setColor(word, color = "") {
-      this.colors[word] = color;
+      this.words = this.words.map(w => {
+        return w.word === word
+          ? {
+              word: word,
+              color: color
+            }
+          : w;
+      });
     },
     isColor(color, word) {
       return this.getColor(word) === color;
@@ -264,28 +146,15 @@ export default {
       if (color === "blue") this.setColor(word, "deep-purple");
       if (color === "deep-purple") this.setColor(word, "");
 
-      this.$forceUpdate();
+      this.setWordsInLocalStorage(this.words);
     },
 
-    getAllWords(min, max, qty) {
-      if (min > max) {
-        console.log(`Erro: mínimo(${min}) maior que máximo(${max}).`); // eslint-disable-line
-        return ["error"];
-      }
-      if (qty > max - min) {
-        console.log(`Erro: quantidade(${qty}) maior diferença entre máximo(${max}) e mínimo(${min}) que é ${max - min}.`); // eslint-disable-line
-        return ["error"];
-      }
-      return getRandomUniqueNumbers(min, max, qty).map(n => {
-        return this.getWord(n);
-      });
-    },
+    //GENERATE
     generate(min = this.min, max = this.max, qty = this.qty) {
       this.loading = true;
       setTimeout(() => {
         this.words = this.getAllWords(min, max, qty);
-        this.startColors(this.words);
-        this.setWordsLocalStorage(this.words);
+        this.setWordsInLocalStorage(this.words);
         this.loading = false;
       }, 1000);
       ga("send", "event", "buttonClick", "refresh cards");// eslint-disable-line
