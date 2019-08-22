@@ -1,6 +1,6 @@
 <template>
   <div
-    class="main-container d-flex justify-center align-center pb-7 flex-column blue-grey"
+    class="main-container d-flex justify-center align-center pb-12 flex-column blue-grey"
   >
     <div class="main-container__detail blue-grey darken-4"></div>
 
@@ -35,7 +35,6 @@
 
     <v-btn
       v-show="words.length > 0"
-      v-on="on"
       color="pink lighten-1"
       dark
       fixed
@@ -157,7 +156,8 @@ export default {
 
       if (color === "") this.setColor(word, "red");
       if (color === "red") this.setColor(word, "blue");
-      if (color === "blue") this.setColor(word, "deep-purple");
+      if (color === "blue") this.setColor(word, "yellow");
+      if (color === "yellow") this.setColor(word, "deep-purple");
       if (color === "deep-purple") this.setColor(word, "");
 
       this.setWordsInLocalStorage(this.words);

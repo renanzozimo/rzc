@@ -13,6 +13,15 @@
       <img class="card-above__img" src="../assets/spy.svg" alt="spy" />
     </v-card>
     <v-card
+      class="card-above yellow lighten-4"
+      :class="{ active: color === 'yellow' }"
+    >
+      <h4 class="text-uppercase disable-select pa-2">
+        {{ word }}
+      </h4>
+      <img class="card-above__img" src="../assets/people.svg" alt="spy" />
+    </v-card>
+    <v-card
       class="card-above deep-purple"
       :class="{ active: color === 'deep-purple' }"
     >
@@ -73,7 +82,8 @@ $dEasing: cubic-bezier(0, 0, 0.2, 1);
     right: -10px;
     bottom: -10px;
     max-height: 80%;
-    filter: saturate(0.5) opacity(0.3);
+    max-width: 120px;
+    filter: saturate(0.5) opacity(0.5);
   }
 }
 </style>

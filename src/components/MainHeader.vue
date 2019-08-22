@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex full-width px-3 pt-3 justify-space-between">
+  <div class="d-none d-sm-flex full-width px-3 pt-3 justify-space-between">
     <div class="full-width">
       <v-btn
         class="mr-3"
@@ -100,7 +100,6 @@
         <v-card-text class="text-center">
           <p>by Renan Zózimo</p>
           <v-btn
-            v-on="on"
             dark
             color="blue"
             href="https://renanzozimo.github.io"
