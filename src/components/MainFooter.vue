@@ -3,12 +3,7 @@
     <v-btn class="mr-1" icon color="pink lighten-5" @click="dialog = true">
       <v-icon>mdi-information</v-icon>
     </v-btn>
-    <v-tooltip
-      class="d-none"
-      :disabled="showTooltip"
-      color="pink darken-2"
-      right
-    >
+    <v-tooltip :disabled="showTooltip" color="pink lighten-1" right>
       <template v-slot:activator="{ on }">
         <v-btn
           v-on="on"
@@ -79,6 +74,17 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+
+    <div class="change-view-button">
+      <v-tooltip :disabled="showTooltip" color="pink lighten-1" top>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" icon color="pink lighten-5" to="key">
+            <v-icon>mdi-apps</v-icon>
+          </v-btn>
+        </template>
+        <span>chaves dos comandantes</span>
+      </v-tooltip>
+    </div>
   </div>
 </template>
 

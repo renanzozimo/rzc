@@ -41,6 +41,7 @@
       bottom
       right
       fab
+      :disabled="loading"
       @click="generate()"
     >
       <v-icon>mdi-sync</v-icon>
@@ -60,7 +61,7 @@ $gridSpacingLargeDevices: 12px;
   padding-left: $gridSpacingLargeDevices;
   padding-top: $gridSpacingLargeDevices;
   @media (max-width: 720px) {
-    & {
+    &:not(.pd) {
       padding-left: $gridSpacingSmallDevices;
       padding-top: $gridSpacingSmallDevices;
     }
@@ -83,7 +84,7 @@ $gridSpacingLargeDevices: 12px;
   flex-wrap: wrap;
   padding-right: $gridSpacingLargeDevices;
   @media (max-width: 720px) {
-    & {
+    &:not(.pd) {
       padding-right: $gridSpacingSmallDevices;
     }
   }

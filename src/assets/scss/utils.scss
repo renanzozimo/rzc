@@ -18,8 +18,15 @@
 
 .v-btn--absolute.v-btn--right, .v-btn--fixed.v-btn--right {
   @media (max-width: 720px) {
-    & {
+    &:not(.rt) {
       right: 4px;
     }
   }
+}
+
+.change-view-button {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
 }

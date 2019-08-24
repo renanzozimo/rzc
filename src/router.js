@@ -14,9 +14,9 @@ export default new Router({
       component: Home
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("./views/About.vue")
+      path: "/key",
+      name: "key",
+      component: () => import("./views/Key.vue")
     }
   ]
 });
