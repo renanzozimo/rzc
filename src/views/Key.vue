@@ -50,7 +50,7 @@
             <v-icon>mdi-cards</v-icon>
           </v-btn>
         </template>
-        <span>cartões de espiões</span>
+        <span>cartões de codinomes</span>
       </v-tooltip>
     </div>
 
