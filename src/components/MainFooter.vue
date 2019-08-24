@@ -83,7 +83,7 @@
 </template>
 
 <style lang="scss">
-.main-header-container {
+.main-footer-container {
   padding: 12px;
   @media (max-width: 720px) {
     & {
