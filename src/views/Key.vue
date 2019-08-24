@@ -21,10 +21,11 @@
       </div>
 
       <div
-        class="d-flex align-center px-3 py-5 text--darken-1"
+        class="d-flex align-center pa-3 text--darken-4"
         :class="startColor + '--text'"
       >
-        <span>{{ startColor }}s start</span>
+        <span class="ml-1">1º:</span>
+        <v-icon large :color="`${startColor} darken-4`">mdi-record</v-icon>
       </div>
     </div>
 

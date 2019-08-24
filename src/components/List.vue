@@ -90,13 +90,12 @@ $gridSpacingLargeDevices: 12px;
   }
 }
 .word-title {
+  white-space: nowrap;
   @media (max-width: 720px) {
     transform: scale(0.8);
-    white-space: nowrap;
   }
   @media (max-width: 540px) {
     transform: scale(0.7) rotate(45deg);
-    white-space: nowrap;
   }
   @media (max-width: 361px) {
     transform: scale(0.6) rotate(45deg);

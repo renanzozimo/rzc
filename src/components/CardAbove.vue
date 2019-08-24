@@ -1,14 +1,10 @@
 <template>
   <div>
-    <v-card class="card-above red" :class="{ active: color === 'red' }">
-      <h4
-        class="selected-word-title text-uppercase disable-select white--text pa-2"
-      >
-        {{ word }}
-      </h4>
-      <img class="card-above__img" src="../assets/spy.svg" alt="spy" />
-    </v-card>
-    <v-card class="card-above blue" :class="{ active: color === 'blue' }">
+    <v-card
+      elevation="0"
+      class="card-above red"
+      :class="{ active: color === 'red' }"
+    >
       <h4
         class="selected-word-title text-uppercase disable-select white--text pa-2"
       >
@@ -17,6 +13,19 @@
       <img class="card-above__img" src="../assets/spy.svg" alt="spy" />
     </v-card>
     <v-card
+      elevation="0"
+      class="card-above blue"
+      :class="{ active: color === 'blue' }"
+    >
+      <h4
+        class="selected-word-title text-uppercase disable-select white--text pa-2"
+      >
+        {{ word }}
+      </h4>
+      <img class="card-above__img" src="../assets/spy.svg" alt="spy" />
+    </v-card>
+    <v-card
+      elevation="0"
       class="card-above yellow lighten-4"
       :class="{ active: color === 'yellow' }"
     >
@@ -26,6 +35,7 @@
       <img class="card-above__img" src="../assets/people.svg" alt="spy" />
     </v-card>
     <v-card
+      elevation="0"
       class="card-above deep-purple"
       :class="{ active: color === 'deep-purple' }"
     >
@@ -58,10 +68,17 @@ export default {
 $dEasing: cubic-bezier(0, 0, 0.2, 1);
 
 .selected-word-title {
+  white-space: nowrap;
+  transform-origin: 15px 5px;
+
   @media (max-width: 720px) {
+    transform: scale(0.8);
+  }
+  @media (max-width: 540px) {
+    transform: scale(0.7) rotate(45deg);
+  }
+  @media (max-width: 361px) {
     transform: scale(0.6) rotate(45deg);
-    transform-origin: 15px 5px;
-    white-space: nowrap;
   }
 }
 
@@ -72,18 +89,17 @@ $dEasing: cubic-bezier(0, 0, 0.2, 1);
   height: 100%;
   width: 100%;
   overflow: hidden;
-  transition: opacity 200ms $dEasing 0ms, transform 200ms $dEasing 0ms,
-    z-index 0ms linear 200ms !important;
+  transform-origin: 0 0;
+  transition: opacity 180ms $dEasing 0ms, transform 180ms $dEasing 0ms !important;
   opacity: 0;
-  transform: translateY(-16px);
-  z-index: -1;
+  transform: scaleY(0) scaleX(1);
+  // z-index: -1;
 
   &.active {
-    transition: opacity 200ms $dEasing 250ms, transform 200ms $dEasing 250ms,
-      z-index 0ms linear 0ms !important;
+    transition: opacity 180ms $dEasing 250ms, transform 180ms $dEasing 250ms !important;
     opacity: 1;
-    transform: translateY(0);
-    z-index: 2;
+    transform: scale(1);
+    // z-index: 2;
   }
 
   > * {
