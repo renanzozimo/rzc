@@ -15,3 +15,11 @@
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
 }
+
+.v-btn--absolute.v-btn--right, .v-btn--fixed.v-btn--right {
+  @media (max-width: 720px) {
+    & {
+      right: 4px;
+    }
+  }
+}

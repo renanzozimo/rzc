@@ -1,13 +1,17 @@
 <template>
   <div>
     <v-card class="card-above red" :class="{ active: color === 'red' }">
-      <h4 class="text-uppercase disable-select white--text pa-2">
+      <h4
+        class="selected-word-title text-uppercase disable-select white--text pa-2"
+      >
         {{ word }}
       </h4>
       <img class="card-above__img" src="../assets/spy.svg" alt="spy" />
     </v-card>
     <v-card class="card-above blue" :class="{ active: color === 'blue' }">
-      <h4 class="text-uppercase disable-select white--text pa-2">
+      <h4
+        class="selected-word-title text-uppercase disable-select white--text pa-2"
+      >
         {{ word }}
       </h4>
       <img class="card-above__img" src="../assets/spy.svg" alt="spy" />
@@ -16,7 +20,7 @@
       class="card-above yellow lighten-4"
       :class="{ active: color === 'yellow' }"
     >
-      <h4 class="text-uppercase disable-select pa-2">
+      <h4 class="selected-word-title text-uppercase disable-select pa-2">
         {{ word }}
       </h4>
       <img class="card-above__img" src="../assets/people.svg" alt="spy" />
@@ -25,10 +29,17 @@
       class="card-above deep-purple"
       :class="{ active: color === 'deep-purple' }"
     >
-      <h4 class="text-uppercase disable-select white--text pa-2">
+      <h4
+        class="selected-word-title text-uppercase disable-select white--text pa-2"
+      >
         {{ word }}
       </h4>
-      <img class="card-above__img" src="../assets/death.svg" alt="spy" />
+      <img
+        class="card-above__img"
+        src="../assets/death.svg"
+        alt="spy"
+        style="filter: saturate(0.2) opacity(0.1);"
+      />
     </v-card>
   </div>
 </template>
@@ -45,6 +56,14 @@ export default {
 
 <style lang="scss">
 $dEasing: cubic-bezier(0, 0, 0.2, 1);
+
+.selected-word-title {
+  @media (max-width: 720px) {
+    transform: scale(0.6) rotate(45deg);
+    transform-origin: 15px 5px;
+    white-space: nowrap;
+  }
+}
 
 .card-above {
   position: absolute !important;
@@ -83,7 +102,7 @@ $dEasing: cubic-bezier(0, 0, 0.2, 1);
     bottom: -10px;
     max-height: 80%;
     max-width: 120px;
-    filter: saturate(0.5) opacity(0.5);
+    filter: saturate(0.5) opacity(0.3);
   }
 }
 </style>

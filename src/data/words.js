@@ -478,5 +478,6 @@ export default [
   "índia",
   "águia",
   "água",
-  "áfrica"
+  "áfrica",
+  "sushi"
 ];

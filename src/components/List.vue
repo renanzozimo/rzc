@@ -1,17 +1,15 @@
 <template>
   <div
-    class="main-container d-flex justify-center align-center pb-12 flex-column blue-grey"
+    class="main-container d-flex justify-center align-center flex-column blue-grey"
   >
     <div class="main-container__detail blue-grey darken-4"></div>
 
-    <main-header />
-
     <div
-      class="main-grid full-width full-height pr-3 pb-3 d-flex justify-space-between"
+      class="main-grid full-width full-height d-flex justify-space-between"
       v-show="words.length > 0"
     >
       <div
-        class="d-flex card-wrapper pl-3 pt-3"
+        class="d-flex card-wrapper"
         v-for="wordItem in words"
         :key="wordItem.word"
       >
@@ -22,7 +20,7 @@
         >
           <div class="d-flex justify-center align-center full-height">
             <h4
-              class="text-center text-uppercase disable-select blue-grey--text text--darken-3"
+              class="word-title text-center text-uppercase disable-select blue-grey--text text--darken-3"
             >
               {{ wordItem.word }}
             </h4>
@@ -32,6 +30,8 @@
         </v-card>
       </div>
     </div>
+
+    <main-footer />
 
     <v-btn
       v-show="words.length > 0"
@@ -51,9 +51,20 @@
 </template>
 
 <style lang="scss">
+$gridSpacingSmallDevices: 4px;
+$gridSpacingLargeDevices: 12px;
+
 .card-wrapper {
   width: 20%;
   flex-shrink: 0;
+  padding-left: $gridSpacingLargeDevices;
+  padding-top: $gridSpacingLargeDevices;
+  @media (max-width: 720px) {
+    & {
+      padding-left: $gridSpacingSmallDevices;
+      padding-top: $gridSpacingSmallDevices;
+    }
+  }
 }
 .main-container {
   height: 100vh;
@@ -70,6 +81,25 @@
 }
 .main-grid {
   flex-wrap: wrap;
+  padding-right: $gridSpacingLargeDevices;
+  @media (max-width: 720px) {
+    & {
+      padding-right: $gridSpacingSmallDevices;
+    }
+  }
+}
+.word-title {
+  @media (max-width: 720px) {
+    transform: scale(0.8);
+    white-space: nowrap;
+  }
+  @media (max-width: 540px) {
+    transform: scale(0.7) rotate(45deg);
+    white-space: nowrap;
+  }
+  @media (max-width: 361px) {
+    transform: scale(0.6) rotate(45deg);
+  }
 }
 </style>
 
@@ -84,14 +114,14 @@ import Words from "../data/words";
 //Components
 import CardAbove from "../components/CardAbove";
 import Loading from "../components/Loading";
-import MainHeader from "../components/MainHeader";
+import MainFooter from "../components/MainFooter";
 
 export default {
   name: "home",
   components: {
     CardAbove,
     Loading,
-    MainHeader
+    MainFooter
   },
   data: () => ({
     loading: false,
